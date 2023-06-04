@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "286575309895",
+    "project_id": "naija-uber-app",
+    "storage_bucket": "naija-uber-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286575309895:android:955a25ccbf7668472f2d62",
+        "android_client_info": {
+          "package_name": "com.ukaka.ridesharingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286575309895-qd6q8ifg5dgd8hqkjltk5vbbosshig9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvoEa55fnsrQLX2jCyu9avFKQFw1LELCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286575309895-qd6q8ifg5dgd8hqkjltk5vbbosshig9n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

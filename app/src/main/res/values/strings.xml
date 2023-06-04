@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Ride Sharing App</string>
+    <string name="app_header">Naija Uber</string>
+    <string name="need_a_ride">Need a ride?</string>
+    <string name="password">Password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
+    <string name="string_continue">Continue</string>
+    <string name="no_account">No account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="here">here.</string>
+    <string name="close_icon">Close</string>
+    <string name="sign_up_for_free">Signup for free</string>
+    <string name="email">Email</string>
+    <string name="user_name">Name</string>
+    <string name="title_bar">Enter Destination</string>
+    <string name="service_error">An error has occurred!</string>
+    <string name="unable_to_receive_coordinates">Unable to receive coordinates for this device</string>
+    <string name="permission_rationale">This app requires the location permission to be granted</string>
+</resources>
