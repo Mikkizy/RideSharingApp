@@ -1,7 +1,6 @@
 package com.ukaka.ridesharingapp.presentation.destination
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -9,15 +8,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ukaka.ridesharingapp.common.Dimensions
 import com.ukaka.ridesharingapp.domain.models.AutoCompleteModel
@@ -31,8 +29,8 @@ fun DestinationScreen(
     state: DestinationState,
     autoCompleteList: List<AutoCompleteModel>,
     onEvents: (DestinationEvents) -> Unit,
+    navController: NavController
 ) {
-    val navController = rememberNavController()
 
     val scaffoldState = rememberScaffoldState()
 
@@ -69,7 +67,8 @@ fun DestinationScreen(
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.colors.background)
+                            .background(MaterialTheme.colors.background),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(items = autoCompleteList) { autoCompleteModel ->
                             DestinationItem(destination = autoCompleteModel.address){
@@ -86,28 +85,6 @@ fun DestinationScreen(
     }
 }
 
-@Composable
-fun DestinationItem(
-    destination: String,
-    onLocationSelected: () -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
-            .clickable { onLocationSelected() }
-            .background(MaterialTheme.colors.surface)
-    ) {
-        Text(
-            modifier = Modifier
-                .padding(Dimensions.pagePadding),
-            text = destination,
-            overflow = TextOverflow.Ellipsis
-        )
-        Divider(modifier = Modifier.fillMaxWidth())
-    }
-}
-
 @Preview
 @Composable
 fun DestinationScreenPreview() {
@@ -115,7 +92,8 @@ fun DestinationScreenPreview() {
         DestinationScreen(
             state = DestinationState(),
             autoCompleteList = emptyList(),
-            onEvents = {}
+            onEvents = {},
+            navController = rememberNavController()
         )
     }
 }

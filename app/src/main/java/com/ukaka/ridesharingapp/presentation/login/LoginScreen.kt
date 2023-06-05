@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ukaka.ridesharingapp.R
 import com.ukaka.ridesharingapp.common.AppHeader
@@ -41,9 +42,9 @@ import kotlinx.coroutines.flow.flow
 fun LoginScreen(
     state: LoginState,
     onEvent: (LoginEvents) -> Unit,
-    validationEvents: Flow<ValidationEvents>
+    validationEvents: Flow<ValidationEvents>,
+    navController: NavController
 ) {
-    val navController = rememberNavController()
 
     val context = LocalContext.current
 
@@ -146,27 +147,41 @@ fun PasswordInputField(
 
     var showPassword by rememberSaveable { mutableStateOf(false) }
 
-    OutlinedTextField(
+    Column(
         modifier = modifier
             .fillMaxWidth(),
-        value = state.password,
-        onValueChange = {
-           onEvent(LoginEvents.EnteredPassword(it))
-        },
-        visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        label = { Text(text = stringResource(id = R.string.password)) },
-        trailingIcon = {
-            val image = if (showPassword)
-                Icons.Filled.Visibility
-            else Icons.Filled.VisibilityOff
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        OutlinedTextField(
+            modifier = modifier
+                .fillMaxWidth(),
+            value = state.password,
+            onValueChange = {
+                onEvent(LoginEvents.EnteredPassword(it))
+            },
+            isError = state.passwordError != null,
+            visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            label = { Text(text = stringResource(id = R.string.password)) },
+            trailingIcon = {
+                val image = if (showPassword)
+                    Icons.Filled.Visibility
+                else Icons.Filled.VisibilityOff
 
-            val description = if (showPassword) stringResource(id = R.string.hide_password) else stringResource(id = R.string.show_password)
-            IconButton(onClick = { showPassword = !showPassword}){
-                Icon(imageVector  = image, description)
+                val description = if (showPassword) stringResource(id = R.string.hide_password) else stringResource(id = R.string.show_password)
+                IconButton(onClick = { showPassword = !showPassword}){
+                    Icon(imageVector  = image, description)
+                }
             }
+        )
+        if (state.passwordError != null) {
+            Text(
+                text = state.passwordError,
+                color = MaterialTheme.colors.error,
+                modifier = Modifier.align(Alignment.End)
+            )
         }
-    )
+    }
 }
 
 @Composable
@@ -225,7 +240,8 @@ fun PreviewLoginScreen() {
         LoginScreen(
             state = LoginState(),
             onEvent = {},
-            validationEvents = flow { }
+            validationEvents = flow { },
+            navController = rememberNavController()
         )
     }
 }

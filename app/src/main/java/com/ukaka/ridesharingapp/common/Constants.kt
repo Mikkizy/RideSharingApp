@@ -9,4 +9,6 @@ object Constants {
     const val GRANT_TYPE = "client_credentials"
     const val SCOPE = "SPACE_DELIMITED_LIST_OF_SCOPES"
     const val MAPS_API_KEY = "AIzaSyAKNF-qTpS1-DjBFyvLAF48Sa0wFTWKUOU"
+    const val SHARED_PREF = "shared_preferences"
+    const val ACCESS_TOKEN = "access_token"
 }

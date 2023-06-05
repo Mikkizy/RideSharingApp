@@ -48,6 +48,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Places.initialize(this, MAPS_API_KEY)
@@ -86,7 +87,8 @@ class MainActivity : ComponentActivity() {
                             LoginScreen(
                                 state = loginState,
                                 onEvent = loginViewModel::onEvent,
-                                validationEvents = loginViewModel.validationEvents
+                                validationEvents = loginViewModel.validationEvents,
+                                navController = navController
                             )
                         }
                         composable(Screen.SignupScreen.route) {
@@ -98,7 +100,8 @@ class MainActivity : ComponentActivity() {
                             SignUpScreen(
                                 state = signupState,
                                 onEvent = signupViewModel::onEvent,
-                                validationEvents = signupViewModel.validationEvents
+                                validationEvents = signupViewModel.validationEvents,
+                                navController = navController
                             )
                         }
                         composable(Screen.DestinationScreen.route) {
@@ -124,7 +127,8 @@ class MainActivity : ComponentActivity() {
                             DestinationScreen(
                                 state = destinationState,
                                 autoCompleteList = autocompleteList,
-                                onEvents = destinationViewModel::onEvent
+                                onEvents = destinationViewModel::onEvent,
+                                navController = navController
                             )
                         }
                         composable(

@@ -11,7 +11,6 @@ import com.ukaka.ridesharingapp.domain.models.RideRequest
 import com.ukaka.ridesharingapp.domain.services.GoogleService
 import com.ukaka.ridesharingapp.domain.services.RideService
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,6 +34,7 @@ class DestinationViewModel @Inject constructor(
     fun onEvent(event: DestinationEvents) {
         when(event) {
             is DestinationEvents.EnteredDestination -> {
+                _state.value = _state.value.copy(destination = event.destination)
                 requestAutocompleteResults(event.destination)
             }
             is DestinationEvents.SelectedLocation -> {
@@ -44,7 +44,6 @@ class DestinationViewModel @Inject constructor(
     }
 
     private fun requestAutocompleteResults(query: String) = viewModelScope.launch {
-        delay(2000L)
         val autocompleteRequest = googleService.getAutocompleteResults(query)
         when (autocompleteRequest) {
             is Resource.Error -> {

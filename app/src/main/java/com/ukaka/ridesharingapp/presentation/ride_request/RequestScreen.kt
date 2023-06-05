@@ -93,8 +93,11 @@ fun RequestScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(Dimensions.oneSpacer))
+                val rideStatus = remember {
+                    state.rideStatus
+                }
                 Text(
-                    text = when (state.rideStatus) {
+                    text = when (rideStatus) {
                         RideStatus.COMPLETED -> "Ride Completed"
                         RideStatus.ACCEPTED -> "Ride Accepted"
                         RideStatus.ARRIVING -> "Driver is close"
